@@ -31,10 +31,9 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <section className="hero">
-        <video className="video-bg" autoPlay muted loop>
-          <source src="./bg_video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+     
+        <img className="image-bg" src="./image.png" alt="Background" />
+     
         <div className="content">
           <h1>
             Empowering <span>Your Vision</span> with <span>Technology</span>
