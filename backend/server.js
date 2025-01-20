@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-const talentRoutes = require('./routes/talentRoutes');
+
 app.use('/api/talent', talentRoutes);
 
 app.get('/', (req, res) => {

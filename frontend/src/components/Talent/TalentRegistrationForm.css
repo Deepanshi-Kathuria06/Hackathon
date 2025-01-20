@@ -1,0 +1,142 @@
+/* Background overlay for modal */
+.background-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Form container styling */
+  .form-container {
+    background: black;
+    width: 600px;
+    /* max-width: 600px; */
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(3, 86, 12, 0.2);
+    position: relative;
+    border-color: #059a11;
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #3fb708;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-button:hover {
+    color: #e74c3c;
+  }
+  
+  /* Form heading */
+  .form-container h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Form group styling */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+    
+    
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    color: none;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+    border-color: #059a11;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: #0ab616;
+  }
+  
+  /* Textarea specific styles */
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Submit button */
+  .submit-button {
+    background: #059a11;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: #054921;
+  }
+  /* File input styling */
+.form-group input[type="file"] {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #333;
+    border-color: #0ab616;
+  }
+  
+  .form-group input[type="file"]::-webkit-file-upload-button {
+    background: #079a1b;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    border-color: #0ab616;
+  }
+  
+  .form-group input[type="file"]::-webkit-file-upload-button:hover {
+    background: #088a0a;
+  }
+  
+  /* Displaying selected file name */
+  .file-name {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
