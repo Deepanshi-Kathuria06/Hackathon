@@ -25,19 +25,27 @@ const TalentRegistrationForm = ({ closeModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+  
+    // Create a new FormData object
     const formDataWithFile = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataWithFile.append(key, formData[key]);
-    });
+    
+    // Append other form data (non-file fields)
+    
+    formDataWithFile.append("name", formData.name);
+    formDataWithFile.append("skillName", formData.skillName);
+    formDataWithFile.append("contactNumber", formData.contactNumber);
+    formDataWithFile.append("email", formData.email);
+    formDataWithFile.append("description", formData.description);
+  
+    // Append the file data
     formDataWithFile.append("profilePhoto", profilePhoto);
-
+  
     try {
       const response = await fetch("http://localhost:5000/api/talent/register", {
         method: "POST",
         body: formDataWithFile,
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         alert(errorData.message || "Submission failed!");
@@ -53,11 +61,12 @@ const TalentRegistrationForm = ({ closeModal }) => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="form-container">
       <h1>Talent Registration</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data"> 
         <div className="form-group">
           <label htmlFor="fullName">Full Name</label>
           <input
@@ -118,7 +127,7 @@ const TalentRegistrationForm = ({ closeModal }) => {
             type="file"
             id="profilePhoto"
             accept="image/*"
-            onChange={handleFileChange}
+            onChange={handleFileChange} // Ensure to handle file change
           />
         </div>
         {loading ? (
@@ -136,4 +145,3 @@ const TalentRegistrationForm = ({ closeModal }) => {
 };
 
 export default TalentRegistrationForm;
-  

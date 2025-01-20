@@ -1,57 +1,31 @@
-const Talent = require('../models/talentModel');
+const Talent = require('../models/talentModel');  // Make sure the model is correctly defined
 
-// Talent registration
-const registerTalent = async (req, res) => {
-  const { name, contact, skills, description, profilePhoto } = req.body;
-
+// Register Talent Function
+exports.registerTalent = async (req, res) => {
   try {
-    const newTalent = await Talent.create({
-      name,
-      contact,
-      skills,
-      description,
-      profilePhoto,
-      status: 'pending', // Default status
-    });
-
-    // Notify admin via email or WhatsApp (pseudo-code for now)
-    // notifyAdmin(newTalent);
-
-    res.status(201).json({ message: 'Talent registered and awaiting admin approval', talent: newTalent });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-// Fetch all talents for admin
-const getAllTalents = async (req, res) => {
-  try {
-    const talents = await Talent.find(); // Admin can see all profiles
-    res.json(talents);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// Approve or reject talent
-const updateTalentStatus = async (req, res) => {
-  const { id } = req.params;
-  const { status } = req.body;
-
-  try {
-    const talent = await Talent.findByIdAndUpdate(id, { status }, { new: true });
-    if (!talent) {
-      return res.status(404).json({ message: 'Talent not found' });
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
     }
 
-    res.json({ message: `Talent status updated to ${status}`, talent });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+    const { name, email, contactNumber, skillName, description } = req.body;
 
-module.exports = {
-  registerTalent,
-  getAllTalents,
-  updateTalentStatus,
+    const newTalent = new Talent({
+      name,
+      email,
+      contactNumber,
+      skillName,
+      description,
+      profilePhoto: req.file.path, // Save the file path
+    });
+
+    await newTalent.save();
+
+    return res.status(200).json({
+      message: 'Talent registered successfully',
+      data: { name, email, contactNumber, skillName, description, profilePhoto: req.file.path },
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 };
