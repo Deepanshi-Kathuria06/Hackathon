@@ -93,7 +93,7 @@ const HomePage = () => {
           <h1>
             Showcase, <span>Get Approved</span>, <span>Get Hired</span>
           </h1>
-          <p>Fill out the form, get noticed, and take the next step in your career.</p>
+          <p>Unleashing Talents, Connecting Ambitions, Creating Tomorrow</p>
           <div className="buttons">
             <button className="primary-btn" onClick={openModal}>
               Join as Talent
