@@ -3,7 +3,7 @@ import "./TalentRegistrationForm.css"; // Keep your existing styles
 
 const TalentRegistrationForm = ({ closeModal }) => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     contactNumber: "",
     skillName: "",
@@ -26,33 +26,30 @@ const TalentRegistrationForm = ({ closeModal }) => {
     e.preventDefault();
     setLoading(true);
   
-    // Create a new FormData object
     const formDataWithFile = new FormData();
-    
-    // Append other form data (non-file fields)
-    
     formDataWithFile.append("name", formData.name);
-    formDataWithFile.append("skillName", formData.skillName);
-    formDataWithFile.append("contactNumber", formData.contactNumber);
     formDataWithFile.append("email", formData.email);
+    formDataWithFile.append("contactNumber", formData.contactNumber);
+    formDataWithFile.append("skillName", formData.skillName);
     formDataWithFile.append("description", formData.description);
-  
-    // Append the file data
-    formDataWithFile.append("profilePhoto", profilePhoto);
+    if (profilePhoto) {
+      formDataWithFile.append("profilePhoto", profilePhoto);
+    }
   
     try {
-      const response = await fetch("http://localhost:5000/api/talent/register", {
+      const response = await fetch("http://localhost:5002/api/talent/register", {
         method: "POST",
         body: formDataWithFile,
       });
   
-      if (!response.ok) {
-        const errorData = await response.json();
-        alert(errorData.message || "Submission failed!");
-      } else {
+      // Check if the response is okay and has valid JSON
+      if (response.ok) {
         const result = await response.json();
         alert(result.message || "Talent registered successfully!");
         closeModal && closeModal(); // Close modal if provided
+      } else {
+        const errorData = await response.text(); // Fetch error data as text
+        alert(`Error: ${errorData || "Submission failed!"}`);
       }
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -68,13 +65,13 @@ const TalentRegistrationForm = ({ closeModal }) => {
       <h1>Talent Registration</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data"> 
         <div className="form-group">
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="name">Full Name</label>
           <input
             type="text"
-            id="fullName"
-            name="fullName"
+            id="name"
+            name="name"
             placeholder="John Doe"
-            value={formData.fullName}
+            value={formData.name}
             onChange={handleInputChange}
           />
         </div>

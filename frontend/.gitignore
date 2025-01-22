@@ -23,4 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 /frontend/public/bg_video.mp4
+/node_modules
+
 
