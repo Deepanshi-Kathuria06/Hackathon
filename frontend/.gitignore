@@ -24,5 +24,6 @@ dist-ssr
 *.sw?
 /frontend/public/bg_video.mp4
 /node_modules
-backend/.envgit
+.env
+
 
