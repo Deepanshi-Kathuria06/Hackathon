@@ -109,8 +109,11 @@ const HomePage = () => {
           <p className="about-description">
              we thrive on innovation and passion. Our mission is to empower talents and foster connections between skilled individuals and clients worldwide. We are committed to creating a platform where talents can shine, showcase their expertise, and find meaningful opportunities to collaborate on projects that make a difference.
           </p>
+<<<<<<< HEAD
           <br></br>
           <br></br>
+=======
+>>>>>>> ff00770b421cbe6adadc65603a0e1424036d0e17
           <div className="interactive-infographic">
             {[
               {
