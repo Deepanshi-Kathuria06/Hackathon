@@ -4,6 +4,8 @@ import HomePage from './components/HomePage';
 import TalentRegistrationForm from './components/Talent/TalentRegistrationForm';
 
 import './App.css';
+import ClientPage from './components/browse/clients';
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
           {/* Define routes with the element prop */}
           <Route path="/" element={<HomePage />} />
           <Route path="/talent-register" element={<TalentRegistrationForm />} />
+          <Route path="/client" component={ClientPage} />
         </Routes>
       </div>
     </Router>

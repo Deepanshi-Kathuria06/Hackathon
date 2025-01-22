@@ -1,69 +1,101 @@
+/* General Styles */
 body, html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  font-family: 'Arial', sans-serif;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 50px;
   background: #000;
+  padding: 15px 50px;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
 }
-
 .header .logo {
-  font-size: 3.5rem; 
-  color: #3498db;
+  font-size: 3.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
 }
 
 .header .logo span {
-  color: #f39c12;
+  color: orange;
 }
+
+.header .logo img {
+  height: 50px; /* Adjust based on your logo's size */
+  margin-right: 10px; /* Space between the image and text */
+}
+
 
 nav ul {
   display: flex;
   justify-content: flex-start;
+  position: relative;
   gap: 30px;
   margin: 0;
   padding: 0;
   list-style: none;
-  right: 80px;
-  position: relative;
+  right: 90px;
 }
 
 nav ul li {
-  font-size: 1.8rem; 
+  font-size: 2rem;
   color: #fff;
   white-space: nowrap;
 }
 
 nav ul li a {
   text-decoration: none;
-  color: #fff;
+  color: white;
   transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-  color: #f39c12;
+  color: orange;
 }
 
+nav .hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+}
+
+.nav-links.open {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  nav .hamburger {
+    display: block;
+  }
+
+  nav .nav-links {
+    display: none;
+  }
+}
+
+/* Hero Section */
 .hero {
   position: relative;
   width: 100vw;
-  height: 80vh; 
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-top: 0;
   z-index: 1;
 }
 
@@ -72,11 +104,9 @@ nav ul li a:hover {
   top: 0;
   left: 50%;
   width: 100vw;
-  height: 80vh; 
+  height: 100vh;
   object-fit: cover;
   z-index: -1;
-  padding: 0;
-  margin: 0;
   transform: translateX(-50%);
 }
 
@@ -87,19 +117,19 @@ nav ul li a:hover {
 }
 
 .content h1 {
-  font-size: 4rem; 
+  font-size: 4.5rem;
   margin-bottom: 30px;
-  color: #fff;
+  color: white;
 }
 
 .content h1 span {
-  color: #f39c12;
+  color: orange;
 }
 
 .content p {
-  font-size: 1.8rem; 
+  font-size: 2rem;
   margin-bottom: 40px;
-  color: #fff;
+  color: white;
 }
 
 .buttons {
@@ -112,7 +142,7 @@ nav ul li a:hover {
   padding: 20px 40px;
   border: none;
   cursor: pointer;
-  font-size: 1.8rem; 
+  font-size: 1.8rem;
   border-radius: 5px;
 }
 
@@ -128,112 +158,116 @@ nav ul li a:hover {
 }
 
 .secondary-btn:hover {
-  background-color: #fff;
-  color: #000;
+  background-color: white;
+  color: black;
 }
 
+/* About Section */
 .about {
-  padding: 80px 50px; 
-  background-color: #000;
-  color: #fff;
   text-align: center;
-  position: relative;
-  width: 100%;
-  margin-top: 0;
+  padding: 80px 50px;
+  background: black;
+  color: white;
 }
 
 .about h2 {
-  font-size: 3.5rem; 
+  font-size: 5rem;
   margin-bottom: 40px;
-  color: #fff;
   font-weight: bold;
   letter-spacing: 2px;
 }
 
+.about h2 span {
+  color: orange;
+}
+
 .about p {
-  font-size: 1.8rem; 
+  font-size: 2.5rem;
   line-height: 2;
   margin-bottom: 40px;
   max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .about-steps {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
-  justify-content: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .step {
-  position: relative;
-  width: 650px; 
+  display: flex;
   background: #1c1c1c;
   border-radius: 10px;
-  padding: 30px;
-  left: 30%;
-  
+  padding: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  transform: translateY(100px);
-  animation: slideUp 0.8s ease-out forwards;
+  margin: 0 auto;
+  width: 90%;
 }
 
-.step h3 {
-  font-size: 2.8rem; 
-  margin-bottom: 15px;
-  color: #fff;
+.step:nth-child(even) {
+  flex-direction: row-reverse;
 }
 
-.step p {
-  font-size: 1.8rem; 
-  color: #ccc;
-  line-height: 1.8;
+.svg-icon {
+  width: 25%;
+  height: auto;
 }
 
-@keyframes slideUp {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
+.step-content {
+  flex: 1;
+}
+
+/* Fixed Specificity Conflicts */
+.step-content h3 {
+  font-size: 3.5rem; /* Increased font size */
+  margin-bottom: 20px;
+  color: white;
+}
+
+.step-content p {
+  font-size: 2rem; /* Increased font size */
+  color: #ddd; /* Adjusted color for better contrast */
+  line-height: 2.2; /* Slightly increased line height */
+}
+
+@media (max-width: 768px) {
+  .about-steps {
+    grid-template-columns: 1fr;
   }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+
+  .step {
+    flex-direction: column;
   }
 }
 
+/* Contact Section */
 .contact-section {
-  padding: 80px 20px; 
+  padding: 80px 20px;
   background: black;
   text-align: center;
-  color: #fff;
+  color: white;
 }
 
 .contact-container {
-  max-width: 700px; 
+  max-width: 700px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #1c1c1c, #444444);
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid orange;
   border-radius: 15px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   padding: 40px;
-  backdrop-filter: blur(10px);
 }
 
 .contact-container h2 {
   margin-bottom: 20px;
-  font-size: 2.5rem; 
-  color:  white;
+  font-size: 2.5rem;
 }
 
 .contact-form label {
   display: block;
   margin-top: 15px;
   font-weight: bold;
-  color: #fff;
-  font-size: 1.6rem; 
+  font-size: 1.6rem;
 }
 
 .contact-form input,
@@ -243,9 +277,9 @@ nav ul li a:hover {
   margin-top: 10px;
   border: 1px solid #444;
   border-radius: 8px;
-  background: #222;
-  color: #fff;
-  font-size: 1.5rem; 
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 1.5rem;
 }
 
 .contact-form textarea {
@@ -256,35 +290,37 @@ nav ul li a:hover {
 .contact-form .submit-btn {
   margin-top: 20px;
   padding: 15px 30px;
-  background: #f39c12;
-  color: #000;
+  background: orange;
+  color: black;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1.8rem; 
+  font-size: 1.8rem;
   transition: background 0.3s, color 0.3s;
 }
 
 .contact-form .submit-btn:hover {
   background: #e67e22;
-  color: #fff;
+  color: white;
 }
 
-p {
-  font-size: 1.8rem; 
-}
-
+/* Footer Section */
 .footer {
   margin-top: 20px;
   padding: 30px 0;
-  background: #333;
-  color: #fff;
+  background: #222;
+  color: white;
   text-align: center;
-  border-top: 2px solid #f39c12;
+  border-top: 2px solid orange;
+}
+
+.footer p {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
 }
 
 .footer .social-icons a {
-  color: #fff;
+  color: white;
   margin: 0 15px;
   font-size: 2rem;
   transition: transform 0.3s;
@@ -293,101 +329,128 @@ p {
 .footer .social-icons a:hover {
   transform: scale(1.2);
 }
+h3{
+  font-size: 3rem;
+}
+/* Modal Content */
+.modal-content.admin-login {
+  background: rgba(0, 0, 0, 0.8); /* Slightly darker background for consistency */
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 400px; /* Ensure it's not too wide */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
+  border: 1px solid green;
+  position: relative;
+}
 
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: green;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  color: grey;
+}
+
+
+.admin-login-container h2 {
+  color: green;
+  font-size: 2.5rem; 
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+}
+
+/* Input Fields */
+.admin-login-form input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  font-size: 1.5rem;
+  text-align: center; 
+  box-sizing: border-box; 
+  opacity: calc(10px);
+}
+
+.admin-login-form input::placeholder {
+  color: #aaa;
+  text-align: center; 
+  font-size: 1.5rem;
+}
+
+.admin-login-form input:focus {
+  outline: none;
+  border: 1px solid  green;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Submit Button */
+.login-submit {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background:  green; 
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  text-transform: uppercase; 
+}
+
+
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .content h1 {
-    font-size: 5rem; 
+  .modal-content.admin-login {
+    padding: 15px 20px;
   }
 
-  .content p {
-    font-size: 1.6rem; 
+  .admin-login-container h2 {
+    font-size: 1.8rem;
   }
 
-  .buttons {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .primary-btn, .secondary-btn {
-    font-size: 2.8rem; 
-  }
-
-  .about-steps {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .about h2 {
-    font-size: 2.8rem; 
-  }
-
-  .step {
-    max-width: 300px; 
-    font-size: 1.8rem; 
-  }
-
-  .contact-container {
-    padding: 20px;
-  }
-
-  .contact-container h2 {
-    font-size: 2.8rem; 
-  }
-
-  .about {
-    padding: 60px 30px; 
-  }
-
-  .contact-section {
-    padding: 60px 10px; 
+  .login-submit {
+    font-size: 1.6rem;
   }
 }
 
-@media (max-width: 480px) {
-  .content h1 {
-    font-size: 3.5rem; 
-  }
 
-  .content p {
-    font-size: 1.4rem; 
-  }
-
-  .primary-btn, .secondary-btn {
-    font-size: 2.4rem; 
-    padding: 15px 30px;
-  }
-
-  .step {
-    max-width: 180px; 
-  }
-
-  .contact-form label {
-    font-size: 1.5rem; 
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    font-size: 1.3rem; 
-  }
-
-  .contact-form .submit-btn {
-    font-size: 1.5rem; 
-  }
-
-  .about h2 {
-    font-size: 2.4rem; 
-  }
-
-  .about p {
-    font-size: 1.6rem; 
-  }
-
-  .about {
-    padding: 50px 20px; 
-  }
-
-  .contact-section {
-    padding: 50px 10px; 
-  }
-  
+.modal-content {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+
+.modal-content:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Label Styles */
+.admin-login-form label {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  text-align: center; 
+  color: #ff6f00;
+  font-weight: bold;
+}
+
+
+
+
+
