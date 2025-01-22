@@ -3,14 +3,13 @@ const router = express.Router();
 const talentController = require('../controllers/TalentController');
 const multer = require('multer');
 
-// Multer setup for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Directory where the files will be stored
+    cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // File naming convention
-  }
+    cb(null, Date.now() + '-' + file.originalname);
+  },
 });
 const upload = multer({ storage: storage });
 

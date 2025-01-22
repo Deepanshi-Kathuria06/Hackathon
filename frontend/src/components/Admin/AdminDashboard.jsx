@@ -1,26 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
+// Admin Dashboard Component
 const AdminDashboard = () => {
-  const [users, setUsers] = useState([]); // Fetch users from the backend
+  const [talents, setTalents] = useState([]);
 
-  const handleApproval = async (userId, action) => {
+  // Fetch talents on component mount
+  useEffect(() => {
+    const fetchTalents = async () => {
+      try {
+        const response = await axios.get('http://your-api-url/talents'); // Replace with your backend API URL
+        setTalents(response.data);
+      } catch (error) {
+        console.error('Error fetching talents:', error);
+      }
+    };
+
+    fetchTalents();
+  }, []);
+
+  // Handle talent accept
+  const handleAccept = async (talentId) => {
     try {
-      const response = await fetch('/approveReject', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, action })
+      const response = await axios.post('http://your-api-url/update-talent-status', {
+        talentId,
+        status: 'Accepted',
       });
-      const data = await response.json();
-      alert(data.message);
+      console.log('Talent accepted:', response.data);
+      setTalents(talents.map((talent) => (talent._id === talentId ? response.data : talent)));
     } catch (error) {
-      alert('Error handling approval');
+      console.error('Error accepting talent:', error);
+    }
+  };
+
+  // Handle talent reject
+  const handleReject = async (talentId) => {
+    try {
+      const response = await axios.post('http://your-api-url/update-talent-status', {
+        talentId,
+        status: 'Rejected',
+      });
+      console.log('Talent rejected:', response.data);
+      setTalents(talents.map((talent) => (talent._id === talentId ? response.data : talent)));
+    } catch (error) {
+      console.error('Error rejecting talent:', error);
     }
   };
 
   return (
     <div>
-      <h2>Admin Dashboard</h2>
-      {/* Render user list with approve/reject buttons */}
+      <h1>Admin Dashboard</h1>
+      <div>
+        {talents.map((talent) => (
+          <div key={talent._id}>
+            <p>Name: {talent.name}</p>
+            <p>Email: {talent.email}</p>
+            <p>Skill: {talent.skillName}</p>
+            <p>Status: {talent.status}</p>
+            <button onClick={() => handleAccept(talent._id)}>Accept</button>
+            <button onClick={() => handleReject(talent._id)}>Reject</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

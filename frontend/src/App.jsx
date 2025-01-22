@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Im
 import HomePage from './components/HomePage';
 import TalentRegistrationForm from './components/Talent/TalentRegistrationForm';
 
+
 import './App.css';
 
 const App = () => {
@@ -13,6 +14,8 @@ const App = () => {
           {/* Define routes with the element prop */}
           <Route path="/" element={<HomePage />} />
           <Route path="/talent-register" element={<TalentRegistrationForm />} />
+         
+          
         </Routes>
       </div>
     </Router>
